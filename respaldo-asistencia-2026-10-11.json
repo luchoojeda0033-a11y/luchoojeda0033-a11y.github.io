@@ -1,0 +1,131 @@
+{
+  "formato": "asistencia-colegio",
+  "version": 1,
+  "creadoEn": "2026-10-11T21:38:20.939Z",
+  "datos": {
+    "baseDatosGrados": {
+      "6.1": [
+        {
+          "id": 1,
+          "nombre": "Ana Martínez",
+          "telefono": "3001234567",
+          "estado": "asistio",
+          "faltas": 0,
+          "justificacion": ""
+        },
+        {
+          "id": 2,
+          "nombre": "Carlos Gómez",
+          "telefono": "3012345678",
+          "estado": "asistio",
+          "faltas": 0,
+          "justificacion": ""
+        },
+        {
+          "id": 3,
+          "nombre": "Laura Rodríguez",
+          "telefono": "3023456789",
+          "estado": "asistio",
+          "faltas": 0,
+          "justificacion": ""
+        },
+        {
+          "id": 4,
+          "nombre": "Andrés Pérez",
+          "telefono": "3104567890",
+          "estado": "asistio",
+          "faltas": 0,
+          "justificacion": ""
+        },
+        {
+          "id": 5,
+          "nombre": "Sofía Ramírez",
+          "telefono": "3115678901",
+          "estado": "asistio",
+          "faltas": 0,
+          "justificacion": ""
+        },
+        {
+          "id": 6,
+          "nombre": "Daniel Torres",
+          "telefono": "3126789012",
+          "estado": "asistio",
+          "faltas": 0,
+          "justificacion": ""
+        },
+        {
+          "id": 7,
+          "nombre": "Valentina López",
+          "telefono": "3137890123",
+          "estado": "asistio",
+          "faltas": 0,
+          "justificacion": ""
+        },
+        {
+          "id": 8,
+          "nombre": "Mateo Sánchez",
+          "telefono": "3148901234",
+          "estado": "asistio",
+          "faltas": 0,
+          "justificacion": ""
+        },
+        {
+          "id": 9,
+          "nombre": "Camila Herrera",
+          "telefono": "3159012345",
+          "estado": "asistio",
+          "faltas": 0,
+          "justificacion": ""
+        },
+        {
+          "id": 10,
+          "nombre": "Juan Castro",
+          "telefono": "3160123456",
+          "estado": "asistio",
+          "faltas": 0,
+          "justificacion": ""
+        },
+        {
+          "id": 11,
+          "nombre": "Mariana Rojas",
+          "telefono": "3171234567",
+          "estado": "asistio",
+          "faltas": 0,
+          "justificacion": ""
+        },
+        {
+          "id": 12,
+          "nombre": "Samuel Díaz",
+          "telefono": "3182345678",
+          "estado": "asistio",
+          "faltas": 0,
+          "justificacion": ""
+        },
+        {
+          "id": 13,
+          "nombre": "Luis Ojeda",
+          "telefono": "3026597388",
+          "estado": "asistio",
+          "faltas": 0,
+          "justificacion": ""
+        }
+      ],
+      "6.2": [],
+      "6.3": [],
+      "7.1": [],
+      "8.1": [],
+      "8.2": [],
+      "9.1": [],
+      "9.2": [],
+      "10.1": [],
+      "10.2": [],
+      "11.1": [],
+      "11.2": [],
+      "11.3": []
+    },
+    "historialGrados": {},
+    "archivosGrados": {
+      "6.1": "6.1.csv"
+    }
+  }
+}

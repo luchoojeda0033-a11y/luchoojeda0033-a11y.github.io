@@ -1,0 +1,432 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --whatsapp-color: #25d366;
+    --light-bg: #f8f9fa;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.login-screen {
+    min-height: calc(100vh - 40px);
+    display: grid;
+    place-items: center;
+}
+
+.login-panel {
+    width: min(100%, 380px);
+    box-sizing: border-box;
+    padding: 28px;
+    background: #fff;
+    border: 1px solid #d9e1e8;
+    border-top: 5px solid var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 8px 28px rgba(25, 45, 65, 0.12);
+}
+
+.login-panel h1 {
+    margin: 0 0 12px;
+    color: var(--primary-color);
+    font-size: 22px;
+}
+
+.login-panel form {
+    display: grid;
+    gap: 10px;
+    text-align: left;
+}
+
+.login-panel input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    font: inherit;
+}
+
+.login-panel .btn-guardar {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.login-notice, .login-error {
+    font-size: 13px;
+}
+
+.login-notice {
+    margin-bottom: 0;
+    color: #5b6470;
+}
+
+.login-error {
+    min-height: 1em;
+    margin: 0;
+    color: var(--danger-color);
+}
+
+.login-link {
+    margin-top: 14px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #176b9c;
+    text-decoration: underline;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+}
+
+#recovery-form[hidden] {
+    display: none;
+}
+
+#recovery-setup-screen .login-panel {
+    display: grid;
+    gap: 10px;
+}
+
+#recovery-setup-form {
+    display: grid;
+    gap: 10px;
+    text-align: left;
+}
+
+#recovery-setup-form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    font: inherit;
+}
+
+#recovery-question-prompt {
+    font-weight: 600;
+}
+
+.container {
+    max-width: 1050px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.header-app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.logo-colegio {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+}
+
+.header-app h1 {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 26px;
+}
+
+/* Tarjetas de Estadísticas */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: #f1f5f9;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    border-bottom: 4px solid var(--secondary-color);
+}
+
+.stat-card.success { border-bottom-color: var(--success-color); }
+.stat-card.danger { border-bottom-color: var(--danger-color); }
+.stat-card.primary { border-bottom-color: var(--primary-color); }
+
+.stat-number {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #666;
+}
+
+.grades-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
+    background: #eef2f7;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.tab-grado {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--primary-color);
+    transition: all 0.2s;
+}
+
+.tab-grado:hover { background-color: #e2e8f0; }
+.tab-grado.active {
+    background-color: var(--secondary-color);
+    color: white;
+    border-color: var(--secondary-color);
+}
+
+.panel-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background: #f1f5f9;
+    padding: 15px 20px;
+    border-radius: 8px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+input[type="date"] {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    font-family: inherit;
+}
+
+.student-search {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+}
+
+input[type="search"] {
+    width: 220px;
+    max-width: 100%;
+    padding: 7px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font: inherit;
+}
+
+.file-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+}
+
+.file-status {
+    margin: 0;
+    color: #555;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+}
+
+th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+tr:hover { background-color: #f8fafc; }
+
+.input-justificacion {
+    width: 90%;
+    padding: 6px 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.attendance-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-asistio, .btn-falto {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    background-color: #cbd5e1;
+    transition: opacity 0.2s;
+}
+
+.btn-asistio.active { background-color: var(--success-color); }
+.btn-falto.active { background-color: var(--danger-color); }
+
+.actions {
+    text-align: right;
+    margin-bottom: 25px;
+}
+
+.session-actions {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 12px;
+}
+
+.backup-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 0 0 25px;
+}
+
+.backup-actions span {
+    width: 100%;
+    color: #5b6470;
+    font-size: 12px;
+    text-align: right;
+}
+
+.btn-secundario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border: 1px solid #bac7d3;
+    border-radius: 5px;
+    background: #fff;
+    color: var(--primary-color);
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.btn-secundario:hover {
+    background: #eef2f7;
+}
+
+.btn-guardar {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-guardar:hover { background-color: #2980b9; }
+
+.history-section {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 25px;
+}
+
+.history-section h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.history-item {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border-left: 4px solid var(--danger-color);
+    font-size: 14px;
+}
+
+.whatsapp-section {
+    margin-top: 25px;
+    padding: 20px;
+    background: #e1fad9;
+    border-radius: 8px;
+    border-left: 5px solid var(--whatsapp-color);
+    display: none;
+}
+
+.whatsapp-section h3 {
+    margin-top: 0;
+    color: #128c7e;
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    background-color: var(--whatsapp-color);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.btn-whatsapp-masivo {
+    background-color: #128c7e;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-whatsapp-masivo:hover { background-color: #0e6c61; }
+
+ul#lista-ausentes {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+ul#lista-ausentes li { margin-bottom: 10px; }

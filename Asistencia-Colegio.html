@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Asistencia Escolar - Institución Educativa Media Académica Sagrado Corazón De Jesús</title>
+    <!-- Esto hace que el logo aparezca en la pestaña del navegador -->
+    <link rel="icon" href="Escudo-Colegio.jpg" type="image/jpg">
+    <!-- Vinculamos la hoja de estilos externa -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="login-screen" class="login-screen" hidden>
+        <section class="login-panel">
+            <h1 id="login-title">Acceso del coordinador</h1>
+            <p id="login-description"></p>
+            <form id="login-form" onsubmit="gestionarAcceso(event)">
+                <label for="login-pin">PIN de acceso</label>
+                <input id="login-pin" type="password" inputmode="numeric" autocomplete="current-password" minlength="6" maxlength="12" pattern="[0-9]{6,12}" required>
+                <div id="confirm-pin-group" hidden>
+                    <label for="confirmar-pin">Confirmar PIN</label>
+                    <input id="confirmar-pin" type="password" inputmode="numeric" autocomplete="new-password" minlength="6" maxlength="12" pattern="[0-9]{6,12}">
+                </div>
+                <button id="login-submit" class="btn-guardar" type="submit">Ingresar</button>
+                <p id="login-error" class="login-error" role="alert"></p>
+            </form>
+            <button id="forgot-pin-button" class="login-link" type="button" onclick="mostrarRecuperacionPIN()">¿Olvidaste tu PIN?</button>
+            <form id="recovery-form" onsubmit="restablecerPINOlvidado(event)" hidden>
+                <p id="recovery-question-prompt"></p>
+                <label for="recovery-answer-input">Respuesta secreta</label>
+                <input id="recovery-answer-input" type="password" autocomplete="off" required>
+                <label for="new-recovery-pin">PIN nuevo</label>
+                <input id="new-recovery-pin" type="password" inputmode="numeric" autocomplete="new-password" minlength="6" maxlength="12" pattern="[0-9]{6,12}" required>
+                <label for="confirm-recovery-pin">Confirmar PIN nuevo</label>
+                <input id="confirm-recovery-pin" type="password" inputmode="numeric" autocomplete="new-password" minlength="6" maxlength="12" pattern="[0-9]{6,12}" required>
+                <button class="btn-guardar" type="submit">Restablecer PIN</button>
+                <button class="btn-secundario" type="button" onclick="volverAIngreso()">Volver al acceso</button>
+                <p id="recovery-error" class="login-error" role="alert"></p>
+            </form>
+            <p class="login-notice">El PIN bloquea esta pantalla, pero no cifra los datos del navegador. Descarga y guarda respaldos en un lugar autorizado.</p>
+        </section>
+    </div>
+
+    <div id="recovery-setup-screen" class="login-screen" hidden>
+        <section class="login-panel">
+            <h1>Configura la recuperación del PIN</h1>
+            <p>Escribe una pregunta personal y una respuesta larga que puedas recordar y que otras personas no puedan adivinar.</p>
+            <form id="recovery-setup-form" onsubmit="guardarPreguntaRecuperacion(event)">
+                <label for="recovery-question-input">Pregunta personal</label>
+                <input id="recovery-question-input" type="text" maxlength="140" autocomplete="off" required>
+                <label for="recovery-answer-setup">Respuesta secreta (mínimo 8 caracteres)</label>
+                <input id="recovery-answer-setup" type="password" minlength="8" autocomplete="new-password" required>
+                <label for="recovery-answer-confirm">Confirmar respuesta</label>
+                <input id="recovery-answer-confirm" type="password" minlength="8" autocomplete="new-password" required>
+                <button type="submit" class="btn-guardar">Guardar recuperación</button>
+                <button type="button" class="btn-secundario" onclick="cancelarConfiguracionRecuperacion()">Cancelar</button>
+            </form>
+            <p id="recovery-setup-error" class="login-error" role="alert"></p>
+        </section>
+    </div>
+
+    <div id="app-content" class="container" style="text-align: center;" hidden>
+        <!-- Logo de la Institución -->
+        <img src="Escudo-Colegio.jpg" alt="Logo Institucional" style="max-width: 120px; height: auto; margin-bottom: 15px;">
+
+        <h1>Sistema de Asistencia Escolar - Institución Educativa Media Académica Sagrado Corazón De Jesús </h1>
+        <div class="session-actions">
+            <button type="button" class="btn-secundario" onclick="iniciarCambioRecuperacion()">Cambiar pregunta de recuperación</button>
+            <button type="button" class="btn-secundario" onclick="bloquearAplicacion()">Cerrar sesión</button>
+        </div>
+        
+        <!-- Pestañas de Grados -->
+        <div class="grades-nav" id="grades-nav"></div>
+
+        <!-- 1. PANEL DE ESTADÍSTICAS GENERALES -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <span class="stat-number" id="stat-total">0</span>
+                <span class="stat-label">Total Estudiantes</span>
+            </div>
+            <div class="stat-card success">
+                <span class="stat-number" id="stat-asistieron">0</span>
+                <span class="stat-label">Presentes Hoy</span>
+            </div>
+            <div class="stat-card danger">
+                <span class="stat-number" id="stat-faltaron">0</span>
+                <span class="stat-label">Ausentes Hoy</span>
+            </div>
+            <div class="stat-card primary">
+                <span class="stat-number" id="stat-porcentaje">100%</span>
+                <span class="stat-label">% Asistencia</span>
+            </div>
+        </div>
+
+        <div class="panel-control">
+            <div>
+                <strong>Apartado:</strong> Grado <span id="grado-titulo" style="color: var(--secondary-color);">6.1</span> | 
+                <!-- 4. SELECTOR DE FECHA / CALENDARIO -->
+                <label for="fecha-asistencia"><strong>Fecha:</strong></label>
+                <input type="date" id="fecha-asistencia" onchange="cambiarFechaManual()">
+            </div>
+            <div class="student-search">
+                <label for="busqueda-estudiante">Buscar estudiante:</label>
+                <input type="search" id="busqueda-estudiante" placeholder="Nombre o teléfono" oninput="renderizarTabla()">
+            </div>
+            <div class="file-upload">
+                <label for="csvFile">Cargar lista CSV:</label>
+                <input type="file" id="csvFile" accept=".csv" onchange="cargarArchivoCSV(event)">
+                <p id="archivo-cargado" class="file-status" aria-live="polite"></p>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre del Estudiante</th>
+                    <th>Teléfono Apoderado</th>
+                    <th>Total Faltas</th>
+                    <th>Estado</th>
+                    <th>Justificación / Nota</th>
+                </tr>
+            </thead>
+            <tbody id="student-list">
+                <!-- Se llena dinámicamente -->
+            </tbody>
+        </table>
+
+        <div class="actions">
+            <button class="btn-guardar" onclick="guardarAsistencia()">Guardar Registro y Generar Alertas</button>
+        </div>
+
+        <div class="backup-actions">
+            <button type="button" class="btn-secundario" onclick="configurarRespaldoExcel()">Elegir o autorizar Excel automático</button>
+            <button type="button" class="btn-secundario" onclick="descargarRespaldo()">Descargar respaldo JSON</button>
+            <label class="btn-secundario" for="archivo-respaldo">Restaurar respaldo</label>
+            <input id="archivo-respaldo" type="file" accept="application/json,.json,.xlsx" onchange="restaurarRespaldo(event)" hidden>
+            <span id="estado-respaldo-excel" role="status">Excel automático: sin configurar.</span>
+            <span>El archivo Excel no está cifrado. Guárdalo en una ubicación autorizada.</span>
+        </div>
+
+        <!-- Panel de Historial de Faltas -->
+        <div class="history-section">
+            <h3>Historial de Inasistencias (Grado <span id="grado-historial-label">6.1</span>)</h3>
+            <div id="historial-container">
+                <p style="color: #666; font-style: italic;">No hay registros de inasistencia guardados aún para este grado.</p>
+            </div>
+        </div>
+
+        <!-- Panel de WhatsApp -->
+        <div id="whatsapp-panel" class="whatsapp-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <h3>Reportes de Inasistencia - Grado <span id="grado-actual-label">6.1</span></h3>
+                <!-- 3. ENVÍO RÁPIDO DE WHATSAPP -->
+                <button class="btn-whatsapp-masivo" onclick="enviarReporteMasivoWhatsApp()">⚡ Abrir Todos los Mensajes</button>
+            </div>
+            <p>Se han detectado los siguientes estudiantes ausentes. Haz clic para enviar el reporte por WhatsApp:</p>
+            <ul id="lista-ausentes"></ul>
+        </div>
+    </div>
+
+    <script src="xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
